@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<section class="content-wrapper">
+		<p th:text="${message}" th:if="${message ne null}"
+			class="alert alert-primary"></p>
+		<div class="d-flex justify-content-center">
+			<div class="container shadow-sm border rounded mt-4 mb-4 bg-white">
+				<h2 class="blue-underline mt-4 mb-4 col-md-12 text-colour">Pre-Order</h2>
+
+				<!-- Add Employee Form -->
+			<!-- 	<form action="#" method="post"> -->
+					<div class="form-row mt-5">
+					
+							<!-- Select Doc. Type -->
+						<div class="form-group col-md-12">
+							<label for="selectCustomer">Select Customer</label> <select
+								class="form-control" id="selectCustomer">
+								<option selected disabled>Select Doc. Type...</option>
+								<option></option>				
+
+							</select>
+						</div>
+
+						
+
+						<div class="form-group col-md-12">
+							<label for="selectProduct">select product</label> 
+							<select class="form-control" >
+							<option>p1</option>
+							<option>p2</option>
+							</select>
+						</div>
+						
+						<div class="form-group col-md-12">
+							<label for="quality">Quality</label> <input
+								type="text" class="form-control" id="quality"
+								placeholder="Enter Shop Name">
+						</div>
+						
+<fieldset id="buildyourform">
+    <legend>Build your own form!</legend>
+</fieldset>
+<input type="button" value="Preview form" class="add" id="preview" />
+<input type="button" value="Add a field" class="add" id="add" />
+						
+					</div>
+
+
+					<div class=" text-center border-top mt-4">
+						<button type="submit" class="btn btn-success mb-4 mt-4 col-6">Order</button>
+					</div>
+				<!-- </form> -->
+			</div>
+
+		</div>
+
+
+
+	</section>
+
+</body>
+</html>

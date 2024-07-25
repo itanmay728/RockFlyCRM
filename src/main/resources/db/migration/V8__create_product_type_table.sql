@@ -1,0 +1,6 @@
+CREATE TABLE product_type (
+  product_type_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  product_name VARCHAR(255) NOT NULL,
+  size_type VARCHAR(255),
+  time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

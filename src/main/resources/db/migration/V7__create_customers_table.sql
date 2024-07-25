@@ -1,0 +1,20 @@
+CREATE TABLE customers (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    shop_name VARCHAR(255),
+    party_name VARCHAR(255),
+    contact_person VARCHAR(255),
+    email VARCHAR(255),
+    city VARCHAR(255),
+    state VARCHAR(255),
+    phone VARCHAR(255),
+    address VARCHAR(255),
+    pincode VARCHAR(255),
+    document_number VARCHAR(255),
+    opening_balance BIGINT,
+    as_of_date DATE,
+    credit_limit BIGINT,
+    time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status INT DEFAULT 0,
+    document_type BIGINT,
+    FOREIGN KEY (document_type) REFERENCES document_type(id)
+);

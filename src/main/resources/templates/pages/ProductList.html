@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Product list</title>
+</head>
+<body>
+	<section class="content-wrapper">
+		<div class="row">
+
+			<div class="col-lg-12 grid-margin stretch-card">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title blue-underline col-md-12 text-colour">Product List</h4>
+
+
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead class="bg-secondary">
+									<tr>
+										<th>S. No</th>
+										<!-- <th>ID</th> -->
+										<th>Item Name</th>
+										<th>Item Code</th>
+										<th>Item HSN / SAC</th>
+										<th>Item Color</th>
+										<th>product_type</th>
+										<th>Size</th>
+										<th>Quantity</th>
+										<th>MRP</th>
+
+										<th>More</th>
+									</tr>
+								</thead>
+								<tbody>
+
+									<tr th:each="mainStock, iterationStatus : ${MainStock}">
+										<td th:text=${iterationStatus.count}></td>
+										<!-- <td th:text="${mainStock.id}"></td> -->
+										<td th:text="${mainStock.itemName}"></td>
+										<td th:text="${mainStock.itemCode}"></td>
+										<td th:text="${mainStock.itemHsnSac}"></td>
+										<td th:text="${mainStock.color}"></td>
+										<td th:text="${mainStock.productType}"></td>
+										<td th:text="${mainStock.size}"></td>
+										<td th:text="${mainStock.quantity}"></td>
+										<td th:text="${mainStock.price.mrp}"></td>
+
+										<td>
+											<!-- <a href="#">more..<i class="mdi mdi-chevron-double-right"></i></a> -->
+
+											<!-- Button trigger modal --> <a href="#" type="button"
+											data-toggle="modal"
+											th:data-target="'#exampleModal'+${mainStock.id}">more..
+												<i class="mdi mdi-chevron-double-right"></i>
+										</a>
+
+
+											<div class="modal fade"
+												th:id="'exampleModal'+${mainStock.id}" tabindex="-1"
+												role="dialog" aria-labelledby="exampleModalLabel"
+												aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5
+																class="modal-title blue-underline col-md-10 text-colour"
+																id="exampleModalLabel">Product Details</h5>
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+
+
+
+															<form>
+																<div class="form-row">
+																	<!-- Item Name -->
+																	<div class="form-group col-md-6">
+																		<label for="itemName">Item Name</label> <input
+																			type="text" class="form-control" id="itemName"
+																			name="itemName" placeholder="Enter item name"
+																			th:value="${mainStock.itemName}" required>
+																	</div>
+
+																	<!-- Item Code -->
+																	<div class="form-group col-md-6">
+																		<label for="itemCode">Item Code</label> <input
+																			type="text" class="form-control" id="itemCode"
+																			name="itemCode" placeholder="Enter item code"
+																			th:value="${mainStock.itemCode}">
+																	</div>
+																</div>
+
+
+																<!-- Select Category -->
+																<div class="form-row">
+
+
+																	<!-- Item HSN / SAC -->
+																	<div class="form-group col-md-6">
+																		<label for="itemCode">Item HSN / SAC</label> <input
+																			type="text" class="form-control" id="itemCode"
+																			name="itemHsnSac" placeholder="Item HSN / SAC"
+																			th:value="${mainStock.itemHsnSac}">
+																	</div>
+
+
+																	<!-- Color -->
+																	<div class="form-group col-md-6">
+																		<label for="color">Color</label> <input type="text"
+																			class="form-control" id="color" name="color"
+																			placeholder="Enter color"
+																			th:value="${mainStock.color}">
+																	</div>
+																</div>
+
+																<div class="form-row">
+
+																	<!-- Select Product Type for Upper body -->
+																	<div class="form-group col-md-6">
+																		<label for="selectProductTypeUpperBody">Product
+																			Type</label> <select class="form-control"
+																			id="selectProductTypeUpperBody" name="productType">
+																			<option th:text="${mainStock.productType}"></option>
+
+																		</select>
+																	</div>
+
+																	<!-- Category Name  
+					<div class="form-group col-md-6">
+						<label for="selectCategory">Select Size</label>
+						<select class="form-control" id="selectCategory">
+							<option>Numeric</option>
+							<option>Alpha Numeric</option>
+						</select>
+					</div>   -->
+
+
+																	<!-- Select Numeric Size -->
+																	<div id="sizeNumeric" class="form-group col-md-6">
+																		<label for="NumericSize">Select Size</label> <select
+																			class="form-control" id="NumericSize" name="size">
+																			<option th:text="${mainStock.size}">Select
+																				Size...</option>
+
+																		</select>
+																	</div>
+
+																</div>
+
+
+
+																<!-- Quantity  -->
+																<div class="form-row">
+
+																	<!-- Color -->
+																	<div class="form-group col-md-6">
+																		<label for="quantity">Quantity</label> <input
+																			type="text" class="form-control" id="quantity"
+																			name="quantity" placeholder="Enter Quantity"
+																			th:value="${mainStock.quantity}">
+																	</div>
+
+																</div>
+
+
+
+																<h4
+																	class="blue-underline mt-4 mb-4 col-md-4 text-colour">PRICING</h4>
+
+																<div class="form-row mb-3">
+
+																	<!-- Pricing Section -->
+																	<div class="form-group col-md-6">
+																		<label for="itemMRP">MRP (Maximum Retail
+																			Price)</label> <input type="text" class="form-control"
+																			id="itemMRP" name="mrp" placeholder="Enter MRP"
+																			th:value="${mainStock.price.mrp}" required>
+																	</div>
+
+																	<div class="form-group col-md-6">
+																		<label for="itemSalePrice">Sale Price</label> <input
+																			type="text" class="form-control" id="itemSalePrice"
+																			name="salePrice" placeholder="Enter sale price"
+																			th:value="${mainStock.price.salePrice}" required>
+																	</div>
+
+																	<div class="form-group col-md-6">
+																		<label for="itemWholesalePrice">Wholesale
+																			Price</label> <input type="text" class="form-control"
+																			id="itemWholesalePrice" name="wholesalePrice"
+																			placeholder="Enter wholesale price"
+																			th:value="${mainStock.price.wholesalePrice}" required>
+																	</div>
+
+																	<div class="form-group col-md-6">
+																		<label for="itemPurchasePrice">Purchase Price</label>
+																		<input type="text" class="form-control"
+																			id="itemPurchasePrice" name="purchasePrice"
+																			placeholder="Enter wholesale price"
+																			th:value="${mainStock.price.purchasePrice}" required>
+																	</div>
+
+																</div>
+
+
+																<!-- <div class=" text-center border-top mt-4">
+					<button type="submit" class="btn btn-success mb-4 mt-4 col-4">Update</button>
+				</div> -->
+															</form>
+
+
+
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</td>
+
+
+
+
+										<!-- <td class="text-danger"> 28.76%
+                                    <i class="mdi mdi-arrow-down"></i>
+                                </td> 
+                                <td>
+                                    <label class="badge badge-danger">Pending</label>
+                                </td> -->
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</section>
+</body>
+</html>

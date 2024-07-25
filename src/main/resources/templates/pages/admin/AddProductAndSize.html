@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<section class="content-wrapper">
+
+ 	 <div class="row">
+			<div class="col-lg-12 grid-margin stretch-card">		
+            <div class="card">
+					<div class="card-body">
+					
+					
+					<form th:action = "@{/admin/addProductAndSize}" method="post" class="form-inline mb-5">
+						<div class="form-group mx-sm-3 mb-2">
+							<label for="inputProduct" class="sr-only">Product Type</label> 
+							<input type="text" class="form-control" id="inputProduct" name="productName" placeholder="Product Type">
+								
+							</div>
+							<!-- Select Product Type for Upper body -->
+								<div class="form-group col-md-2">
+									<label for="sizeType" class="sr-only">size Type</label> 
+									
+									<select
+										class="form-control" id="sizeType"
+										name="sizeType">
+										<option selected disabled>--Select Size Type--</option>					
+										<option>Numeric</option>
+										<option>Alpha-Numeric</option>
+										
+									</select>
+								</div>
+						<button type="submit" class="btn btn-primary mb-2">Add Product</button>
+					</form>
+					
+					
+                    <h4 class="card-title blue-underline col-md-12 text-colour">Product List</h4>
+                    
+					
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>S. No</th>
+                                <th>ID</th>
+                                <th>Product Type</th>
+                                <th>Size Type</th>
+                                <th>Manage</th>
+                                <th>Action</th>                           
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="product, iterationStatus : ${productType}">
+                                <td th:text=${iterationStatus.count}></td>
+                                <td th:text="${product.productId}"></td>
+                                 <td th:text="${product.productName}"></td>
+                                <td class="py-1" th:text="${product.sizeType}"></td>
+                                <td class="py-1">
+                                
+                                <a href="#">manage..</a>
+                                
+                                </td>
+                                <td>
+                                    <a type="button" class="btn btn-danger text-white">Delete</a>
+                                </td>
+                                
+                            </tr>                           
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+
+						<form th:action="@{/admin/addSize}" method="post" class="form-inline mb-5">
+							<div class="form-group mx-sm-3 mb-2">
+								<label for="inputSize" class="sr-only">Size</label> 
+								<input type="text" class="form-control" id="inputSize" name="sizes" placeholder="Sizes">
+							</div>
+							<button type="submit" class="btn btn-primary mb-2">Add Size</button>
+						</form>
+
+
+						<h4 class="card-title blue-underline col-md-12 text-colour">Size List</h4>
+                    
+					
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>S. No</th>
+                                <th>ID</th>
+                                <th>Size</th>
+                                <th>Action</th>                           
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="numericsize, iterationStatus : ${numericSize}">
+                            	<td th:text=${iterationStatus.count} class="py-1"></td> 
+                            	<td th:text="${numericsize.sizeId}"></td>
+                                <td th:text="${numericsize.sizes}"></td>
+                                <td>
+                                    <a type="button" class="btn btn-danger text-white">Delete</a>
+                                </td>
+                                
+                            </tr>                           
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>  
+        
+        
+        
+        
+           <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+
+						<form th:action="@{/admin/manageSize}" method="post" class="form-inline mb-5">
+							<div class="form-group mx-sm-3 mb-2">
+								<label for="input" class="sr-only">Numeric Size</label> 
+								<input type="text" class="form-control" id="input" name="productId" placeholder="Product ID">
+								
+								<label for="inputSize" class="sr-only">Numeric Size</label> 
+								<input type="text" class="form-control" id="inputSize" name="sizeId" placeholder="Size ID">
+								
+								<button type="submit" class="btn btn-primary ">Add Size</button>
+							</div>
+							
+						</form>
+
+
+						<h4 class="card-title blue-underline col-md-12 text-colour">Product Size List</h4>
+                    
+					
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>S. No</th>
+                                <th>ID</th>
+                                <th>Product ID</th>
+                                <th>Size ID</th>                           
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            	<td class="py-1"></td> 
+                            	<td></td>
+                                <td></td>
+                                <td>
+                                    <a type="button" class="btn btn-danger text-white">Delete</a>
+                                </td>
+                                
+                            </tr>                           
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+      </div> 
+
+
+
+</section>
+
+</body>
+</html>

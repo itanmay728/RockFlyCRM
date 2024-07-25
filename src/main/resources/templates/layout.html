@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en" dir="" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:fragment="layout(content)">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Rockfly</title>
+<link rel="stylesheet"
+	th:href="@{/vendors/iconfonts/simple-line-icon/css/simple-line-icons.css}">
+<link rel="stylesheet"
+	th:href="@{/vendors/iconfonts/mdi/css/materialdesignicons.min.css}">
+<link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
+<link rel="stylesheet"
+	th:href="@{/vendors/css/vendor.bundle.addons.css}">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/customStyle.css}">
+<link rel="shortcut icon" th:href="@{/images/rockfly.png}" />
+
+
+<style>
+/* Custom CSS for the underline */
+.blue-underline {
+	border-bottom: 2px solid #5932EA;
+	/* Blue underline */
+	font-weight: bold;
+	/* Make the text bold */
+}
+
+.text-colour {
+	color: #5932EA;
+}
+</style>
+</head>
+
+<body>
+	<div class="container-scroller">
+
+		<!-- partial:partials/_navbar.html   (TOP NAV BAR) -->
+		<nav
+			class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+			<div
+				class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+
+				<a class="navbar-brand brand-logo" href="/dashboard"> <img
+					th:src="@{/images/logo.svg}" alt="logo" />
+				</a> <a class="navbar-brand brand-logo-mini" href="index.html"> <img
+					th:src="@{/images/logo-mini.svg}" alt="logo" />
+				</a>
+
+			</div>
+
+			<div class="navbar-menu-wrapper d-flex align-items-center">
+
+				<button
+					class="navbar-toggler navbar-toggler d-none d-lg-block navbar-dark align-self-center mr-3"
+					type="button" data-toggle="minimize">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<ul class="navbar-nav navbar-nav-right">
+					<li class="nav-item dropdown d-none d-xl-inline-block"><a
+						class="nav-link dropdown-toggle" id="UserDropdown" href="#"
+						data-toggle="dropdown" aria-expanded="false"> <span
+							class="profile-text">Hello, Richard V.Welsh !</span> <img
+							class="img-xs rounded-circle"
+							th:src="@{/images/faces-clipart/pic-5.jpg}" alt="Profile image">
+					</a>
+						<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+							aria-labelledby="UserDropdown">
+
+							<a class="dropdown-item mt-2"> Manage Accounts </a> <a
+								class="dropdown-item"> Change Password </a> <a
+								th:href="@{/logout}" class="dropdown-item"> Sign Out </a>
+
+						</div></li>
+				</ul>
+
+				<button
+					class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+					type="button" data-toggle="offcanvas">
+					<span class="icon-menu"></span>
+				</button>
+
+			</div>
+		</nav>
+
+		<!-- partial (SIDE NAVBAR)-->
+		<div class="container-fluid page-body-wrapper">
+			<!-- partial:partials/_sidebar.html -->
+			<nav class="sidebar sidebar-offcanvas" id="sidebar">
+				<ul class="nav">
+
+					<li class="nav-item nav-profile">
+
+						<div class="nav-link">
+							<div class="user-wrapper">
+
+								<div class="profile-image">
+									<img th:src="@{/images/faces-clipart/pic-5.jpg}"
+										alt="profile image">
+								</div>
+
+								<div class="text-wrapper">
+									<p class="profile-name">Richard V.Welsh</p>
+
+									<div>
+										<small class="designation text-muted">Manager</small> <span
+											class="status-indicator online"></span>
+									</div>
+
+								</div>
+							</div>
+
+							<!-- <button class="btn btn-success btn-block"> New Project <i class="mdi mdi-plus"></i> </button> -->
+
+						</div>
+
+					</li>
+
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/dashboard}"> <i
+							class="menu-icon mdi mdi-television"></i> <span
+							class="menu-title">Dashboard</span>
+					</a></li>
+
+
+<!-- Admin -->
+
+					<!--   Product    -->
+
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#ui-basic" aria-expanded="false"
+						aria-controls="ui-basic"> <i
+							class="menu-icon mdi mdi-content-copy"></i> <span
+							class="menu-title">Manage Product</span> <i class="menu-arrow"></i>
+					</a>
+
+						<div class="collapse" id="ui-basic">
+
+							<ul class="nav flex-column sub-menu">
+
+								 <li class="nav-item"><a class="nav-link" href="#" th:href="@{/admin/addProductAndSize}">Add Product/Size</a>
+								</li>
+								<li class="nav-item"><a class="nav-link" href="#" th:href="@{/admin/addSpecificationsAndRackNumber}">Add Rack/Specifi..</a>
+								</li>	
+							</ul>
+
+						</div></li>
+						
+
+						
+				<!-- Add Employee  -->
+				<div sec:authorize="hasRole('ROLE_ADMIN')">
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#ui-basic2" aria-expanded="false"
+						aria-controls="ui-basic"> 
+						<i class="menu-icon mdi mdi-account-edit"></i> <span
+							class="menu-title">Employee</span> <i class="menu-arrow"></i>
+					</a>
+
+						<div class="collapse" id="ui-basic2">
+							<ul class="nav flex-column sub-menu">
+
+								<li class="nav-item"> <a class="nav-link" th:href="@{/admin/addEmployee}"> 
+									<i class="menu-icon mdi mdi-account-multiple"></i> <span class="menu-title">Add Staff</span>
+									</a>
+								</li>
+								
+								<li class="nav-item"> <a class="nav-link" href="#" th:href="@{/admin/employeelist}"> 
+									<i class="menu-icon mdi mdi-clipboard-text"></i> <span class="menu-title">Staff List</span>
+									</a>
+								</li>
+
+
+							</ul>
+						</div>
+						</li>
+						</div>
+					
+
+<!-- Admin END -->
+
+
+<!-- Manager -->
+					<!--   Product    -->
+
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#ui-basic3" aria-expanded="false"
+						aria-controls="ui-basic"> <i
+							class="menu-icon mdi mdi-content-copy"></i> <span
+							class="menu-title">Product</span> <i class="menu-arrow"></i>
+					</a>
+
+						<div class="collapse" id="ui-basic3">
+
+							<ul class="nav flex-column sub-menu"> 
+
+								<li class="nav-item"><a class="nav-link" href="#"
+									th:href="@{/manager/addItem}">Add Item</a></li>
+								<li class="nav-item"><a class="nav-link" href="#"
+									th:href="@{/manager/itemList}">View/Edit Item List</a></li>
+								<li class="nav-item"><a class="nav-link" href="#"
+									th:href="@{/salesStock}">View/Edit sales Stock</a></li>
+								<!-- <li class="nav-item"><a class="nav-link" href="#"
+									th:href="@{/admin/product}">Bar Code</a></li> -->
+							</ul>
+
+						</div></li>
+
+<!-- Manager END -->
+
+
+
+
+						
+						
+<!-- Sales -->											
+						
+					<!-- Add Customer  -->
+
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#ui-basic1" aria-expanded="false"
+						aria-controls="ui-basic"> <i
+							class="menu-icon mdi mdi-account-multiple-plus"></i> <span
+							class="menu-title">Customers</span> <i class="menu-arrow"></i>
+					</a>
+
+						<div class="collapse" id="ui-basic1">
+							<ul class="nav flex-column sub-menu">
+
+								<li class="nav-item"><a class="nav-link" href="#"
+									th:href="@{/admin/addCustomer}">Add Customer</a></li>
+								<li class="nav-item"><a class="nav-link" href="#"
+									th:href="@{/admin/customers}">Customer List</a></li>
+
+
+							</ul>
+						</div>
+						</li>	
+						
+					<!-- order  -->
+
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#ui-basic4" aria-expanded="false"
+						aria-controls="ui-basic"> 
+						<i class="menu-icon mdi mdi-baby-buggy"></i> <span
+							class="menu-title">Order</span> <i class="menu-arrow"></i>
+					</a>
+
+						<div class="collapse" id="ui-basic4">
+							<ul class="nav flex-column sub-menu">
+
+								<li class="nav-item"><a class="nav-link" href="#" th:href="@{/sales/preorder}">Pre-Order</a></li>
+								<li class="nav-item"><a class="nav-link" href="#">Post Order</a></li>
+
+
+							</ul>
+						</div>
+						</li>
+
+<!-- Sales END	 -->			
+				
+
+
+					
+
+					<li class="nav-item"><a class="nav-link" href="#"> <i
+							class="menu-icon mdi mdi-chart-line"></i> <span
+							class="menu-title">Tables</span>
+					</a></li>
+
+					<li class="nav-item"><a class="nav-link"> <i
+							class="menu-icon mdi mdi-table"></i> <span class="menu-title">forms</span>
+					</a></li>
+
+
+					<li class="nav-item"><a class="nav-link" href="#"> <i
+							class="menu-icon mdi mdi-sticker"></i> <span class="menu-title">Icons</span>
+					</a></li>
+
+
+					<li class="nav-item"><a class="nav-link"
+						data-toggle="collapse" href="#auth" aria-expanded="false"
+						aria-controls="auth"> <i
+							class="menu-icon mdi mdi-account-settings-variant"></i> <span
+							class="menu-title">Settings</span> <i class="menu-arrow"></i>
+					</a>
+
+						<div class="collapse" id="auth">
+							<ul class="nav flex-column sub-menu">
+								<li class="nav-item"><a class="nav-link" href="#"
+									th:href="@{/logout}">Sign Out</a></li>
+								<li class="nav-item"><a class="nav-link" href="#">
+										Login </a></li>
+								<li class="nav-item"><a class="nav-link" href="#">
+										Register </a></li>
+								<li class="nav-item"><a class="nav-link" href="#"> 404
+								</a></li>
+								<li class="nav-item"><a class="nav-link" href="#"> 500
+								</a></li>
+							</ul>
+						</div></li>
+				</ul>
+			</nav>
+
+			<!-- partial -->
+			<div class="main-panel">
+				<div th:replace="${content}"></div>
+				<!-- content-wrapper ends -->
+
+				<!-- partial:partials/_footer.html -->
+				<footer class="footer shadow bg-info footer-fixed-bottom">
+					<div class="container-fluid clearfix">
+
+						<span
+							class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright
+							© 2024 <a href="https://www.suprams.net/" target="_blank">Suprams</a>.
+							All rights reserved.
+						</span> <span
+							class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center text-white">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i>
+						</span>
+
+					</div>
+				</footer>
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+
+		</div>
+
+		<!-- page-body-wrapper ends -->
+	</div>
+	<!-- container-scroller -->
+
+	<!-- plugins:js -->
+
+	<!-- Bootstrap JS (including Popper.js) -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+
+	<script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+	<script th:src="@{/vendors/js/vendor.bundle.addons.js}"></script>
+	<script th:src="@{/js/off-canvas.js}"></script>
+	<script th:src="@{/js/misc.js}"></script>
+	<script th:src="@{/js/dashboard.js}"></script>
+	<script th:src="@{/js/addItem.js}"></script>
+	<!-- script for search bar -->
+	<script th:src="@{/js/search.js}"></script>
+	<!-- script to add dynamic dropdown for cities and states -->
+	<script th:src="@{/js/cities.js}"></script>
+	<script language="javascript">print_state("state");</script>
+	<script language="javascript">print_city("city");</script>
+	<!-- script ends -->
+	
+	<!-- Pre-Order js -->
+	<script th:src="@{/js/preOrder.js}"></script>
+
+
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+		integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+		crossorigin="anonymous"></script>
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+
+			funApplicationDisabled();
+
+			funContactDisabled();
+
+			funProductDisabled();
+
+		});
+
+		function funApplicationDisabled() {
+			$('#app-input-service-id').prop('readOnly', true);
+			$('#app-input-name').prop('disabled', true);
+			$('#app-input-icon').prop('disabled', true);
+			$('#app-input-meta-desc').prop('disabled', true);
+			$('#app-input-meta-key').prop('disabled', true);
+			$('#app-input-meta-google-site').prop('disabled', true);
+			$('#app-btn-cancel').prop('disabled', true);
+			$('#app-btn-save').prop('disabled', true);
+			$('#app-btn-edit').prop('disabled', false);
+		}
+
+		function funContactDisabled() {
+			$('#contact-input-service-id').prop('readOnly', true);
+			$('#contact-name').prop('disabled', true);
+			$('#contact-phone').prop('disabled', true);
+			$('#contact-sms').prop('disabled', true);
+			$('#contact-hiMessage').prop('disabled', true);
+			$('#contact-address').prop('disabled', true);
+			$('#contact-email').prop('disabled', true);
+			$('#contact-btn-cancel').prop('disabled', true);
+			$('#contact-btn-save').prop('disabled', true);
+			$('#contact-btn-edit').prop('disabled', false);
+		}
+
+		function funProductDisabled() {
+			$('#product-input-uuid').prop('readOnly', true);
+			$('#product-input-name').prop('disabled', true);
+			$('#product-input-img-src').prop('disabled', true);
+			$('#product-input-img-alt').prop('disabled', true);
+			$('#product-input-href').prop('disabled', true);
+			$('#product-input-price').prop('disabled', true);
+			$('#product-input-brochure').prop('disabled', true);
+			$('#product-btn-cancel').prop('disabled', true);
+			$('#product-btn-save').prop('disabled', true);
+			$('#product-btn-edit').prop('disabled', false);
+		}
+
+	</script>
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<section class="content-wrapper">
+
+	<div class="container shadow-sm border rounded mt-4 mb-4 bg-white">
+				
+				<h2 class="blue-underline mt-4 mb-4 col-md-12 text-colour">Product Detail</h2>
+				
+			<form th:action="@{/manager/mainStock?mainStockId={id} (id=${MainStockProduct.id})}" th:method="post">
+				<div class="form-row mb-3">
+				
+				<!-- Select Rack Number -->
+					<div class="form-group col-md-6">
+						<label for="selectProductTypeUpperBody">Rack Number</label> 
+						<select class="form-control" id="selectProductTypeUpperBody" name="id">
+							<option selected disabled>Select Size...</option>
+							<option th:each="rackNumbers : ${RackNumbers}" th:value="${rackNumbers.id}" th:text="${rackNumbers.rack}"></option>
+							
+						</select>
+					</div>
+					
+					
+					<!-- Select button -->
+					<div class="form-group col-md-4">
+						<label for="selectProductTypeUpperBody">Submit Button</label> 
+						<button type="submit" class="btn btn-success form-control">Submit</button>
+					</div>
+				
+				</div>
+				</form>
+				
+				
+		<div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+
+						<h4 class="card-title blue-underline col-md-12 text-colour">Rack</h4>
+                    
+					
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>S. No</th>
+                                <th>Rack Number</th>
+                                <th>Action</th>                           
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="rackNumber, iterationStatus : ${rackNumbers}">
+                            	<td th:text=${iterationStatus.count} class="py-1"></td>
+                                <td th:text="${rackNumber.rack}">A1</td>
+                                <td>
+                                    <a type="button" class="btn btn-danger text-white">Delete</a>
+                                </td>
+                                
+                            </tr>                           
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div> 
+				
+				<div class="form-row">
+					<!-- Item Name -->
+					<div class="form-group col-md-6">
+						<label for="itemName">Product Type</label> 
+						<input type="text" class="form-control" id="itemName" name="itemName" placeholder="Enter item name" th:value="${MainStockProduct.productType.productName}" required>
+					</div>
+
+					<!-- Item Code -->
+					<div class="form-group col-md-6">
+						<label for="itemCode">Item Code</label> <input type="text"
+							class="form-control" id="itemCode" name="itemCode"
+							placeholder="Enter item code" th:value="${MainStockProduct.styleNumber}">
+					</div>
+				</div>
+
+
+				<!-- Select Category -->
+				<div class="form-row">
+
+
+					<!-- Item HSN / SAC -->
+					<div class="form-group col-md-6">
+						<label for="itemCode">Item HSN / SAC</label> <input type="text"
+							class="form-control" id="itemCode" name="itemHsnSac"
+							placeholder="Item HSN / SAC" th:value="${MainStockProduct.itemHsnSac}">
+					</div>
+
+
+					<!-- Color -->
+					<div class="form-group col-md-6">
+						<label for="color">Color</label> <input type="text"
+							class="form-control" id="color" name="color"
+							placeholder="Enter color" th:value="${MainStockProduct.color}">
+					</div>
+				</div>
+
+				<div class="form-row">
+
+					<!-- Select Product Type for Upper body -->
+					<div class="form-group col-md-6">
+						<label for="selectProductTypeUpperBody">Product Specification</label> <select
+							class="form-control" id="selectProductTypeUpperBody"
+							name="productType">
+							<option th:text="${MainStockProduct.productSpecifications.specification}"></option>
+							
+						</select>
+					</div>
+
+
+					<!-- Select Numeric Size -->
+					<div id="sizeNumeric" class="form-group col-md-6">
+						<label for="NumericSize">Select Size</label> <select
+							class="form-control" id="NumericSize" name="size">
+							<option th:text="${MainStockProduct.sizes.sizes}">Select Size...</option>
+							
+						</select>
+					</div>
+
+				</div>
+				
+				
+				
+				<!-- Quantity  -->
+				<div class="form-row">
+				
+					<!-- Color -->
+					<div class="form-group col-md-6">
+						<label for="quantity">Quantity</label> <input type="text"
+							class="form-control" id="quantity" name="quantity"
+							placeholder="Enter Quantity" th:value="${MainStockProduct.quantity}">
+					</div>
+
+				</div>
+				
+				
+
+				<h4 class="blue-underline mt-4 mb-4 col-md-4 text-colour">PRICING</h4>
+
+				<div class="form-row mb-3">
+
+					<!-- Pricing Section -->
+					<div class="form-group col-md-6">
+						<label for="itemMRP">MRP (Maximum Retail Price)</label> <input
+							type="text" class="form-control" id="itemMRP" name="mrp"
+							placeholder="Enter MRP" th:value="${MainStockProduct.mrp}" required>
+					</div>
+
+					<div class="form-group col-md-6">
+						<label for="itemSalePrice">Sale Price</label> <input type="text"
+							class="form-control" id="itemSalePrice" name="salePrice"
+							placeholder="Enter sale price" th:value="${MainStockProduct.salePrice}" required>
+					</div>
+
+					<div class="form-group col-md-6">
+						<label for="itemWholesalePrice">Wholesale Price</label> <input
+							type="text" class="form-control" id="itemWholesalePrice"
+							name="wholesalePrice" placeholder="Enter wholesale price" th:value="${MainStockProduct.wholesalePrice}"
+							required>
+					</div>
+
+					<div class="form-group col-md-6">
+						<label for="itemPurchasePrice">Purchase Price</label> <input
+							type="text" class="form-control" id="itemPurchasePrice"
+							name="purchasePrice" placeholder="Enter wholesale price" th:value="${MainStockProduct.purchasePrice}"
+							required>
+					</div>
+					
+				</div>
+				
+			
+					
+
+				 <div class=" text-center border-top mt-4">
+					<button type="submit" class="btn btn-primary mb-4 mt-4 col-4">Update</button>
+				</div> 
+			</div>
+
+</section>
+</body>
+</html>

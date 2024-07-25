@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout::layout(~{::section})">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<section class="content-wrapper">
+
+  	 <div class="row">
+    
+    
+    <!--  <div class="container mt-4">
+       Row for buttons 
+        <div class="row">
+             <div class="col-md-3 mb-3">
+                <button type="button" class="btn btn-primary btn-block">Jeans</button>
+            </div>
+            <div class="col-md-3 mb-3">
+                <button type="button" class="btn btn-secondary btn-block">T-Shirt</button>
+            </div>
+            <div class="col-md-3 mb-3">
+                <button type="button" class="btn btn-success btn-block">Shirt</button>
+            </div>
+            <div class="col-md-3 mb-3">
+                <button type="button" class="btn btn-danger btn-block">Jacket</button>
+            </div> 
+
+				
+		</div>
+    </div> -->
+
+			<div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                
+                	<div class="form-group col-md-2">
+                	<form th:action="@{/manager/mainStock}">
+						<label for="sortBy">Sort By</label> 
+						<select class="form-control" id="sortBy" name="sortByproduct_type">
+							<option>All</option>
+							<option>Jeans</option>
+							<option>T-Shirt</option>
+							<option>Shirt</option>
+						</select>
+						
+						<button type="submit" class="btn btn-info col-md-12 mt-2">Submit</button>
+					</form>
+					</div>
+                    <h4 class="card-title blue-underline col-md-12 text-colour">Main Stock List</h4>
+                    
+					
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="bg-secondary">
+                            <tr>
+                            	<th>S. No</th>
+                                <!-- <th>ID</th> -->
+                                <th>Product Type</th>
+                                <th>Item Code</th>
+                                <!-- <th>Item HSN / SAC</th> -->
+                                <th>Item Color</th>
+                                <th>Product Specification</th>
+                                <th>Size</th>
+                                <th>Quantity</th>
+                                <th>MRP</th>
+                                <th>Add Rack</th>
+                                <th>More</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            
+                            <tr th:each="mainStock, iterationStatus : ${MainStock}">
+                            	<td th:text=${iterationStatus.count}></td>
+                                <!-- <td th:text="${mainStock.id}"></td> -->
+                                <td th:text="${mainStock.productType.productName}"></td>
+                                <td th:text="${mainStock.styleNumber}"></td>
+                                <!-- <td th:text="${mainStock.itemHsnSac}"></td> -->
+                                <td th:text="${mainStock.color}"></td>
+                                <td th:text="${mainStock.productSpecifications.specification}"></td>
+                                <td th:text="${mainStock.sizes.sizes}"></td>
+                                <td th:text="${mainStock.quantity}"></td>
+                                <td th:text="${mainStock.mrp}"></td>
+                                
+                                <td>
+                                
+                                <button type="button" class="btn btn-info">Add</button>
+                                
+                                </td>
+                                
+                                <td >
+                                
+                             <a th:href="@{/manager/itemList/{productId} (productId=${mainStock.id}) }">more..<i class="mdi mdi-chevron-double-right"></i></a> 
+                                
+                                
+                                </td>
+                                
+                                
+                                
+                                
+                                <!-- <td class="text-danger"> 28.76%
+                                    <i class="mdi mdi-arrow-down"></i>
+                                </td> 
+                                <td>
+                                    <label class="badge badge-danger">Pending</label>
+                                </td> -->
+	                           </tr> 
+	                                          
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div> 
+      </div>               
+
+</section>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout::layout(~{::section})">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+</head>
+
+<body>
+
+	<section class="content-wrapper">
+		<p th:text="${message}" th:if="${message ne null}"
+			class="alert alert-primary"></p>
+		<div class="d-flex justify-content-center">
+			<div class="container shadow-sm border rounded mt-4 mb-4 bg-white">
+				<h2 class="blue-underline mt-4 mb-4 col-md-12 text-colour">Add
+					Customer</h2>
+
+				<!-- Add Employee Form -->
+				<form action="#" th:action="@{/admin/addCustomer}"
+					th:object="${customers}" method="post">
+					<div class="form-row mt-5">
+						<!-- Employee Name -->
+
+						<div class="form-group col-md-6">
+							<label for="shopName">Shop Name</label> <input
+								type="text" name="shopName" class="form-control" id="shopName"
+								placeholder="Enter Shop Name">
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="partyName">Party Name</label> <input
+								type="text" name="partyName" class="form-control" id="partyName"
+								placeholder="Enter Party Name">
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="customerName">Contact Person</label> 
+							<select class="form-control" name="contactPerson">
+							<option>Owner</option>
+							<option>Employee</option>
+							</select>
+						</div>
+						<!-- Phone Number -->
+						<div class="form-group col-md-6">
+							<label for="phoneNumber">Phone Number...</label> <input type="text"
+								name="phone" class="form-control" id="phoneNumber"
+								placeholder="phone Number">
+						</div>
+					</div>
+
+
+					<div class="form-row">
+
+						<!-- Select Doc. Type -->
+						<div class="form-group col-md-6">
+							<label for="selectRole">Doc. Type</label> <select
+								class="form-control" name="documentType" id="selectRole">
+								<option selected disabled>Select Doc. Type...</option>
+								<option th:each="docType : ${docs}" th:value="${docType.id}"
+									th:text="${docType.type}"></option>
+
+								<!-- <option>Aadhaar</option>
+								<option>Pan</option>
+								<option>GSTIN No.</option> -->
+
+							</select>
+						</div>
+
+						<!-- Aadhar -->
+						<div class="form-group col-md-6">
+							<label for="docNumber">Doc. Number</label> <input type="text"
+								name="documentNumber" class="form-control" id="docNumber"
+								placeholder="Enter Document number">
+						</div>
+					</div>
+
+
+
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-primary btn-sm"
+						data-toggle="modal" data-target="#exampleModal">Add Doc.
+						Type</button>
+
+					<!-- <div class="modal fade" id="exampleModal" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Add Document</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+
+
+									<form th:action="@{/admin/documentType}" th:method="post" action="">
+									<div>
+
+										<div class="form-row">
+
+											Enter Document type
+											<div class="form-group mb-4 col-md-6">
+												<label for="documentType">Document Type</label> <input type="text"
+													class="form-control" id="documentType" name="type"
+													placeholder="Enter document type">
+											</div>
+										</div>
+
+										<div class=" text-center border-top mt-4">
+											<button type="submit" class="btn btn-success mb-4 mt-4 col-8">Add
+												Document Type</button>
+										</div>
+										</div>
+									</form>
+
+								</div>
+								<div class="modal-footer">
+								
+								</div>
+							</div>
+						</div>
+					</div>
+ -->
+					<!-- User Name / Email -->
+					<div class="form-row mt-4">
+
+						<div class="form-group col-md-6">
+							<label for="email">Email</label> <input type="email" name="email"
+								class="form-control" id="email" placeholder="@example.com">
+						</div>
+
+					</div>
+
+					<!-- Address -->
+					<h4 class="blue-underline mt-4 mb-4 col-md-4 text-colour">Full
+						Address</h4>
+
+					<div class="form-row">
+
+						<!-- Address Section -->
+						<div class="form-group col-md-12">
+							<label for="Address">Address</label> <input type="text"
+								name="address" class="form-control" id="Address"
+								placeholder="Enter Address" required>
+						</div>
+
+						<!--	<div class="form-group col-md-6">
+							<label for="City">City</label> <input type="text" name="city"
+								class="form-control" id="City" placeholder="Enter City" required>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="state">State</label> <input type="text" name="state"
+								class="form-control" id="state" placeholder="Enter State"
+								required>
+						</div> -->
+						<div class="form-group col-md-12">
+							<label for="state">State</label> 
+							<select onchange="print_city('city', this.selectedIndex);" id="state" name="state" class="form-control" required></select>
+						</div>
+
+						<div class="form-group col-md-12">
+							<label for="city">City</label> <select id="city" name="city"
+								class="form-control" required></select>
+						</div>
+						<!-- <script language="javascript">print_state("state");</script>
+						<script language="javascript">print_city("city");</script> -->
+
+						<div class="form-group col-md-6">
+							<label for="pinCode">Pin Code</label> <input type="text"
+								name="pincode" class="form-control" id="pinCode"
+								placeholder="Enter Pin Code" required>
+						</div>
+
+					</div>
+
+
+					<!-- Credit & Balance -->
+					<h4 class="blue-underline mt-4 mb-4 col-md-4 text-colour">Credit
+						& Balance</h4>
+
+					<div class="form-row">
+
+						<!-- Address Section -->
+						<div class="form-group col-md-6">
+							<label for="openingBalance">Opening Balance</label> <input
+								type="text" name="openingBalance" class="form-control"
+								id="openingBalance" placeholder="Enter Opening Balance" required>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="asofDate">As of Date</label> <input type="date"
+								name="asOfDate" class="form-control" id="asofDate"
+								placeholder="Enter As of Date" required>
+						</div>
+
+						<div class="form-group col-md-12">
+							<label for="customLimit">Custom Limit (optional)</label> <input
+								type="text" name="creditLimit" class="form-control"
+								id="customLimit" placeholder="Enter Limit" required>
+						</div>
+
+					</div>
+
+
+					<div class=" text-center border-top mt-4">
+						<button type="submit" class="btn btn-success mb-4 mt-4 col-6">Add
+							Customer</button>
+					</div>
+				</form>
+
+				<div class="modal fade" id="exampleModal" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Add Document</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+
+
+								<form th:action="@{/admin/documentType}" th:method="post"
+									action="">
+									<div>
+
+										<div class="form-row">
+
+											<!-- Enter Document type -->
+											<div class="form-group mb-4 col-md-6">
+												<label for="documentType">Document Type</label> <input
+													type="text" class="form-control" id="documentType"
+													name="type" placeholder="Enter document type">
+											</div>
+										</div>
+
+										<div class=" text-center border-top mt-4">
+											<button type="submit" class="btn btn-success mb-4 mt-4 col-8">Add
+												Document Type</button>
+										</div>
+									</div>
+								</form>
+
+							</div>
+							<div class="modal-footer"></div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+		</div>
+
+
+
+	</section>
+
+</body>
+
+</html>

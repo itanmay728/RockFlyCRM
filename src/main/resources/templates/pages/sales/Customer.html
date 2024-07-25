@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org "
+	th:replace="layout::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Customer Details</title>
+</head>
+<body>
+
+	<section class="content-wrapper">
+
+		<div class="container">
+			<h2 class="mt-5">Vendor Details</h2>
+			<div class="card mt-3">
+				<div class="card-body">
+					<h5 class="card-title" th:text="${customer.shopName}"></h5>
+					<p class="card-text">
+						<strong>Party Name:</strong> <span th:text="${customer.partyName}"></span>
+					</p>
+					<p class="card-text">
+						<strong>Contact Person:</strong> <span
+							th:text="${customer.contactPerson}"></span>
+					</p>
+					<p class="card-text">
+						<strong>Email:</strong> <span th:text="${customer.email}"></span>
+					</p>
+					<p class="card-text">
+						<strong>City:</strong> <span th:text="${customer.city}"></span>
+					</p>
+					<p class="card-text">
+						<strong>State:</strong> <span th:text="${customer.state}"></span>
+					</p>
+					<p class="card-text">
+						<strong>Phone:</strong> <span th:text="${customer.phone}"></span>
+					</p>
+					<p class="card-text">
+						<strong>Address:</strong> <span th:text="${customer.address}"></span>
+					</p>
+					<p class="card-text">
+						<strong>Pincode:</strong> <span th:text="${customer.pincode}"></span>
+					</p>
+					<p class="card-text">
+						<strong>Document Number:</strong> <span
+							th:text="${customer.documentNumber}"></span>
+					</p>
+					<p class="card-text">
+						<strong>Opening Balance:</strong> <span
+							th:text="${customer.openingBalance}"></span>
+					</p>
+					<p class="card-text">
+						<strong>As Of Date:</strong> <span th:text="${customer.asOfDate}"></span>
+					</p>
+					<p class="card-text">
+						<strong>Credit Limit:</strong> <span
+							th:text="${customer.creditLimit}"></span>
+					</p>
+					<p class="card-text">
+						<strong>Document Type:</strong> <span
+							th:text="${customer.documentType.type}"></span>
+					</p>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+</body>
+</html>

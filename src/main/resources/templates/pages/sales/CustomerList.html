@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org "
+	th:replace="layout::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+
+
+	<section class="content-wrapper">
+
+		<!--navbar  for applying filters-->
+		<!--   <form action="/admin/customers" , method="get">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <span class="navbar-brand">Sort by: </span>
+              <ul class="navbar-nav">
+                <li class="nav-item active" style="padding-right: 20px;">
+                  <div class="dropdown">
+                    <select class="form-select" aria-label="Default select example" name="sort_by">
+                      <option value="asOfDate">As of Date</option>
+                    </select>
+                  </div>
+                </li>
+        
+                <span class="navbar-brand">Per page: </span>
+                <ul class="navbar-nav">
+                  <li class="nav-item active" style="padding-right: 20px;">
+                    <div class="dropdown">
+                      <select class="form-select" aria-label="Default select example" name="per_page">
+                        <option selected value="2">2</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                      </select>
+                    </div>
+                  </li>
+        
+                  <li class="nav-item active" style="padding-left: 20px;">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-primary" type="submit" id="dropdownMenuButton">
+                        Apply filter(s)
+                      </button>
+        
+                    </div>
+                  </li>
+                </ul>
+            </nav>
+        
+          </form> -->
+		<!--end navbar-->
+
+		<!-- Navbar for applying filters -->
+		<form action="/admin/customers" method="get">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="container-fluid">
+					<div class="d-flex align-items-center">
+						<span class="navbar-brand mb-0">Sort by:</span> <select
+							class="form-select ms-2" name="sort_by" style="width: auto;">
+							<option value="asOfDate">As of Date</option>
+						</select>
+					</div>
+
+					<div class="d-flex align-items-center ms-3">
+						<span class="navbar-brand mb-0">Per page:</span> <select
+							class="form-select ms-2" name="per_page" style="width: auto;">
+							<option selected value="2">2</option>
+							<option value="5">5</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+						</select>
+					</div>
+
+					<div class="ms-3">
+						<button class="btn btn-primary" type="submit">Apply
+							filter(s)</button>
+					</div>
+				</div>
+			</nav>
+		</form>
+		<!-- End navbar -->
+
+		<!-- search -->
+		<div class="search-container my-3">
+			<input onkeyup="search()" id="search-input" type="text" class="form-control"
+				placeholder="Search your contacts">
+
+			<div class="search-result">
+				<!-- result goes here -->
+			</div>
+		</div>
+
+
+		<div class="col-lg-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title blue-underline col-md-12 text-colour">Customer
+						List</h4>
+
+					<a class="btn btn-success btn-block col-lg-2 mb-5"
+						th:href="@{/admin/addCustomer}"> Add Customer <i
+						class="mdi mdi-plus"></i>
+					</a>
+
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+
+								<tr>
+									<th>User</th>
+									<th>First name</th>
+									<th>Amount</th>
+									<th>As of date</th>
+								</tr>
+
+							</thead>
+
+							<tbody>
+
+								<tr th:each="customer: ${customers}">
+									<td class="py-1"><img
+										src="../../images/faces-clipart/pic-1.png" alt="image" /></td>
+									<td th:text="${customer.shopName}"></td>
+									<td th:text="${customer.openingBalance}"></td>
+									<td th:text="${customer.asOfDate}"></td>
+								</tr>
+
+
+							</tbody>
+
+						</table>
+
+
+
+						<!--<div aria-label="Page navigation example" class="mt-5">
+							<ul class="pagination justify-content-center">
+
+								<li class="page-item "><a class="page-link" href="#"
+									tabindex="-1">Previous</a></li>
+
+								<li class="page-item"><a class="page-link" href="#">1</a></li>
+								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item"><a class="page-link" href="#">Next</a>
+								</li>
+							</ul>
+						</div>-->
+
+						<!-- to insert paginated links  -->
+
+						<nav th:if="${links ne null}" aria-label="...">
+							<ul class="pagination justify-content-center">
+								<th:block th:each="link: ${links}">
+									<li class="page-item"><th:block th:utext="${link}">link</th:block>
+									</li>
+								</th:block>
+							</ul>
+						</nav>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+</body>
+</html>
